@@ -4,7 +4,10 @@
   "description": "A wrapper for Juno API",
   "main": "main.ts",
   "repository": "https://github.com/Mdsp9070/juno-api-wrapper",
-  "author": "Matheus de Souza Pessanha",
+  "author": {
+    "name": "Matheus de Souza Pessanha",
+    "email": "matheus_pessanha2001@outlook.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.6.3",
