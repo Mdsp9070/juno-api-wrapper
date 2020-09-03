@@ -21,7 +21,7 @@ export class Juno {
     };
   }
 
-  async banks(): Promise<Returns.Banks> {
+  async listBanks(): Promise<Returns.Banks> {
     const { data, status } = await this.api.get<Juno.Banks>('/data/banks', {
       headers: this.headers,
     });
@@ -32,7 +32,7 @@ export class Juno {
     return data._embedded.banks;
   }
 
-  async balance(): Promise<Juno.Balance> {
+  async getBalance(): Promise<Juno.Balance> {
     const { data, status } = await this.api.get<Juno.Balance>('/balance', {
       headers: this.headers,
     });
