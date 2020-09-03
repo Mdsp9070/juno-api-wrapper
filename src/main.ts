@@ -43,23 +43,36 @@ export class Juno {
     return data;
   }
 
-  async charge(
-    chargeData: Juno.Charge,
-    userData: Juno.Billing
+  async createCharge(
+    charge: Juno.NewCharge,
+    billing: Juno.Billing
   ): Promise<Returns.Charges> {
     const body = {
-      ...chargeData,
-      ...userData,
+      charge,
+      billing,
     };
 
     const { data, status } = await this.api.post<Juno.Charges>(
       '/charges',
-      body
+      body,
+      { headers: this.headers }
     );
 
     if (status !== 200 || !data._embedded.charges.length)
       throw new AppError('Cannot create Charge', status);
 
     return data._embedded.charges;
+  }
+
+  async checkChargeStatus(chargeId: string): Promise<Juno.ChargeStatus> {
+    const { data, status } = await this.api.get<Juno.ChargeStatus>(
+      `/charges/${chargeId}`,
+      { headers: this.headers }
+    );
+
+    if (status !== 200 || !data.amount)
+      throw new AppError('Cannot get charge status', status);
+
+    return data;
   }
 }

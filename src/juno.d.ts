@@ -29,7 +29,16 @@ declare namespace Juno {
       charges: {
         id: string;
         code: number;
-        dueDate: string | Date;
+        dueDate: string;
+        payments: {
+          id: string;
+          code: number;
+          status: string;
+          date: string;
+          amount: number;
+          transactionId: string;
+          failReason: string;
+        }[]
       }[];
     };
   }
@@ -40,10 +49,11 @@ declare namespace Juno {
     transferableBalance: number;
   }
 
-  export interface Charge {
+  export interface NewCharge {
     description: string;
     amount: string;
     installments: number;
+    paymentType: 'BOLETO' | 'CREDIT_CARD';
   }
 
   export interface Billing {
@@ -52,6 +62,19 @@ declare namespace Juno {
     email: string;
     phone: string;
   }
+
+  export interface ChargeStatus {
+    amount: number;
+    payments: {
+      id: string;
+      code: number;
+      status: string;
+      date: string;
+      amount: number;
+      transactionId: string;
+      failReason: string;
+    }[];
+  }
 }
 
 declare namespace Returns {
@@ -59,6 +82,6 @@ declare namespace Returns {
   export type Charges = {
     id: string;
     code: number;
-    dueDate: string | Date;
+    dueDate: string;
   }[];
 }
