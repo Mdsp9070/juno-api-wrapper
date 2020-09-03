@@ -46,6 +46,10 @@ isSandbox: boolean - if you only want to test your API, set to true; default ===
 #### Example
 
 ```typescript
+  import { getAccesToken, Juno } from 'juno-api-wrapper'
+
+  const token = await getAccesToken(clientId, clientSecret);
+
   const options = {
     accessToken: token,
     resourceToken: process.env.TOKEN,
