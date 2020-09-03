@@ -1,9 +1,8 @@
 # Juno API Wrapper
-<hr />
+
 A Wrapper for [Juno API](https://dev.juno.com.br/api/v2)
 
 ## Installation
-<hr />
 
 ```shell
 $ npm install --save juno-api-wrapper
@@ -12,7 +11,6 @@ $ yarn add juno-api-wrapper
 ```
 
 ## API
-<hr />
 
 ### getAccessToken
 
