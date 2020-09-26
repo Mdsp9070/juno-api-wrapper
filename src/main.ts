@@ -75,4 +75,26 @@ export class Juno {
 
     return data;
   }
+
+  async createPayment(
+    chargeId: string,
+    billing: { email: string; address: string },
+    creditCardDetails: Juno.CardDetails
+  ): Promise<Returns.Payment> {
+    const body = {
+      chargeId,
+      ...billing,
+      ...creditCardDetails,
+    };
+
+    const { data, status } = await this.api.post<Returns.Payment>(
+      '/payments',
+      body
+    );
+
+    if (status !== 200 || !data.transactionId)
+      throw new AppError('Error on processing payment!', status);
+
+    return data;
+  }
 }

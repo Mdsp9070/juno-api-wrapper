@@ -38,7 +38,7 @@ declare namespace Juno {
           amount: number;
           transactionId: string;
           failReason: string;
-        }[]
+        }[];
       }[];
     };
   }
@@ -75,13 +75,36 @@ declare namespace Juno {
       failReason: string;
     }[];
   }
+
+  export interface CardDetails {
+    creaditCardHash: string;
+    creaditCardId?: string;
+  }
 }
 
 declare namespace Returns {
   export type Banks = { name: string; number: string }[];
+
   export type Charges = {
     id: string;
     code: number;
     dueDate: string;
   }[];
+
+  export interface Payment {
+    transactionId: string;
+    installments: number;
+    payments: {
+      id: string;
+      chargeId: string;
+      date: string;
+      realeaseDate: string;
+      amount: number;
+      fee: number;
+      type: string;
+      status: string;
+      transactionId: string;
+      failReason: string;
+    }[];
+  }
 }
