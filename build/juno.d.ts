@@ -1,67 +1,32 @@
-export interface Authorization {
-  access_token: string;
-  token_type: string;
-  expires_in: number;
-  scope: string;
-  user_name: string;
-  jti: string;
-}
+import { AxiosInstance } from 'axios';
 
-export interface Options {
+interface Options {
   accessToken: string;
   resourceToken: string;
   isSandbox: boolean;
 }
 
-export interface Banks {
-  _embedded: {
-    banks: {
-      number: string;
-      name: string;
-    }[];
-  };
-}
-
-export interface Charges {
-  _embedded: {
-    charges: {
-      id: string;
-      code: number;
-      dueDate: string;
-      payments: {
-        id: string;
-        code: number;
-        status: string;
-        date: string;
-        amount: number;
-        transactionId: string;
-        failReason: string;
-      }[];
-    }[];
-  };
-}
-
-export interface Balance {
+interface Balance {
   balance: number;
   withheldBalance: number;
   transferableBalance: number;
 }
 
-export interface NewCharge {
+interface NewCharge {
   description: string;
   amount: string;
   installments: number;
   paymentType: 'BOLETO' | 'CREDIT_CARD';
 }
 
-export interface Billing {
+interface Billing {
   name: string;
   document: string;
   email: string;
   phone: string;
 }
 
-export interface ChargeStatus {
+interface ChargeStatus {
   amount: number;
   payments: {
     id: string;
@@ -74,20 +39,20 @@ export interface ChargeStatus {
   }[];
 }
 
-export interface CardDetails {
+interface CardDetails {
   creaditCardHash: string;
   creaditCardId?: string;
 }
 
-export type BanksResponse = { name: string; number: string }[];
+type BanksResponse = { name: string; number: string }[];
 
-export type ChargesResponse = {
+type ChargesResponse = {
   id: string;
   code: number;
   dueDate: string;
 }[];
 
-export interface Payment {
+interface Payment {
   transactionId: string;
   installments: number;
   payments: {
@@ -102,4 +67,28 @@ export interface Payment {
     transactionId: string;
     failReason: string;
   }[];
+}
+
+declare function getAccessToken(
+  clientId: string,
+  clientSecret: string,
+  isSandbox: boolean
+): Promise<string>;
+
+declare class Juno {
+  private api: AxiosInstance;
+  private headers: { [key: string]: string | number };
+  private options: Options;
+
+  constructor(options: Options);
+
+  listBanks(): Promise<BanksResponse>;
+  getBalance(): Promise<Balance>;
+  createCharge(charge: NewCharge, billing: Billing): Promise<ChargesResponse>;
+  checkChargeStatus(chargeId: string): Promise<ChargeStatus>;
+  createPayment(
+    chargeId: string,
+    billing: { email: string; address: string },
+    creditCardDetails: CardDetails
+  ): Promise<Payment>;
 }
