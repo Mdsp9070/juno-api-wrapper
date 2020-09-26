@@ -20,7 +20,7 @@ export async function getAccessToken(
     {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Basic: ${hash}`,
+        Authorization: `Basic ${hash}`,
       },
     }
   );
