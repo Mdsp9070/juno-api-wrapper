@@ -49,7 +49,7 @@ export interface Balance {
 
 export interface NewCharge {
   description: string;
-  amount: string;
+  amount: number;
   installments: number;
   paymentType: 'BOLETO' | 'CREDIT_CARD';
 }
