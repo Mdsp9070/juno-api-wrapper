@@ -10,7 +10,6 @@ export interface Authorization {
 export interface Options {
   accessToken: string;
   resourceToken: string;
-  resourceOptions: string;
   isSandbox: boolean;
 }
 
