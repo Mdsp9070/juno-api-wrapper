@@ -50,13 +50,12 @@ function getAccessToken(clientId, clientSecret, isSandbox) {
             switch (_b.label) {
                 case 0:
                     hash = utils_1.getClientHash(clientId, clientSecret);
-                    return [4 /*yield*/, axios_1.default({
-                            url: isSandbox
-                                ? 'https://sandbox.boletobancario.com/authorization-server/oauth/token'
-                                : 'https://api.juno.com.br/authorization-server/oauth/token',
-                            method: 'post',
+                    return [4 /*yield*/, axios_1.default.post("" + (isSandbox
+                            ? 'https://sandbox.boletobancario.com/authorization-server/oauth/token'
+                            : 'https://api.juno.com.br/authorization-server/oauth/token'), 'grant_type=client_credentials', {
                             headers: {
-                                Authorization: "Basic: " + hash,
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                Authorization: "Basic " + hash,
                             },
                         })];
                 case 1:
