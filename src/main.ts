@@ -2,11 +2,25 @@ import pkg from '../package.json';
 import axios, { AxiosInstance } from 'axios';
 import { AppError } from './errors/AppError';
 
+import {
+  Options,
+  Banks,
+  BanksResponse,
+  Charges,
+  ChargesResponse,
+  ChargeStatus,
+  Balance,
+  Billing,
+  Payment,
+  NewCharge,
+  CardDetails,
+} from './@types/juno';
+
 export class Juno {
   private api: AxiosInstance;
   private headers: { [key: string]: string | number };
 
-  constructor(private options: Juno.Options) {
+  constructor(private options: Options) {
     this.api = axios.create({
       baseURL: this.options.isSandbox
         ? 'https://sandbox.boletobancario.com/api-integration'
@@ -21,8 +35,8 @@ export class Juno {
     };
   }
 
-  async listBanks(): Promise<Returns.Banks> {
-    const { data, status } = await this.api.get<Juno.Banks>('/data/banks', {
+  async listBanks(): Promise<BanksResponse> {
+    const { data, status } = await this.api.get<Banks>('/data/banks', {
       headers: this.headers,
     });
 
@@ -32,8 +46,8 @@ export class Juno {
     return data._embedded.banks;
   }
 
-  async getBalance(): Promise<Juno.Balance> {
-    const { data, status } = await this.api.get<Juno.Balance>('/balance', {
+  async getBalance(): Promise<Balance> {
+    const { data, status } = await this.api.get<Balance>('/balance', {
       headers: this.headers,
     });
 
@@ -44,19 +58,17 @@ export class Juno {
   }
 
   async createCharge(
-    charge: Juno.NewCharge,
-    billing: Juno.Billing
-  ): Promise<Returns.Charges> {
+    charge: NewCharge,
+    billing: Billing
+  ): Promise<ChargesResponse> {
     const body = {
       charge,
       billing,
     };
 
-    const { data, status } = await this.api.post<Juno.Charges>(
-      '/charges',
-      body,
-      { headers: this.headers }
-    );
+    const { data, status } = await this.api.post<Charges>('/charges', body, {
+      headers: this.headers,
+    });
 
     if (status !== 200 || !data._embedded.charges.length)
       throw new AppError('Cannot create Charge', status);
@@ -64,8 +76,8 @@ export class Juno {
     return data._embedded.charges;
   }
 
-  async checkChargeStatus(chargeId: string): Promise<Juno.ChargeStatus> {
-    const { data, status } = await this.api.get<Juno.ChargeStatus>(
+  async checkChargeStatus(chargeId: string): Promise<ChargeStatus> {
+    const { data, status } = await this.api.get<ChargeStatus>(
       `/charges/${chargeId}`,
       { headers: this.headers }
     );
@@ -79,18 +91,15 @@ export class Juno {
   async createPayment(
     chargeId: string,
     billing: { email: string; address: string },
-    creditCardDetails: Juno.CardDetails
-  ): Promise<Returns.Payment> {
+    creditCardDetails: CardDetails
+  ): Promise<Payment> {
     const body = {
       chargeId,
       ...billing,
       ...creditCardDetails,
     };
 
-    const { data, status } = await this.api.post<Returns.Payment>(
-      '/payments',
-      body
-    );
+    const { data, status } = await this.api.post<Payment>('/payments', body);
 
     if (status !== 200 || !data.transactionId)
       throw new AppError('Error on processing payment!', status);
