@@ -14,9 +14,9 @@ interface Balance {
 
 interface NewCharge {
   description: string;
-  amount: string;
+  amount: number;
   installments: number;
-  paymentType: 'BOLETO' | 'CREDIT_CARD';
+  paymentTypes: ['BOLETO' | 'CREDIT_CARD'];
 }
 
 interface Billing {

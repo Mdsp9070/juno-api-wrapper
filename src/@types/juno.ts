@@ -51,7 +51,7 @@ export interface NewCharge {
   description: string;
   amount: number;
   installments: number;
-  paymentType: 'BOLETO' | 'CREDIT_CARD';
+  paymentTypes: ['BOLETO' | 'CREDIT_CARD'];
 }
 
 export interface Billing {
