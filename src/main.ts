@@ -95,7 +95,9 @@ export class Juno {
   ): Promise<Payment> {
     const body = {
       chargeId,
-      ...billing,
+      billing: {
+        ...billing,
+      },
       ...creditCardDetails,
     };
 
