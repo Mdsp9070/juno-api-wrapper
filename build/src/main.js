@@ -140,7 +140,7 @@ var Juno = /** @class */ (function () {
             });
         });
     };
-    Juno.prototype.createPayment = function (chargeId, billing, cardDetails) {
+    Juno.prototype.createPayment = function (chargeId, billingDetails, cardDetails) {
         return __awaiter(this, void 0, void 0, function () {
             var body, _a, data, status;
             return __generator(this, function (_b) {
@@ -148,7 +148,7 @@ var Juno = /** @class */ (function () {
                     case 0:
                         body = {
                             chargeId: chargeId,
-                            billing: __assign({}, billing),
+                            billing: __assign({}, billingDetails),
                             creditCardDetails: __assign({}, cardDetails),
                         };
                         return [4 /*yield*/, this.api.post('/payments', body, {
