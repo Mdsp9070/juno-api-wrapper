@@ -61,6 +61,18 @@ export interface Billing {
   phone: string;
 }
 
+export interface PaymentBilling {
+  email: string;
+  address: {
+    street: string;
+    number: string;
+    complement: string;
+    city: string;
+    state: string;
+    postCode: string;
+  };
+}
+
 export interface ChargeStatus {
   amount: number;
   payments: {

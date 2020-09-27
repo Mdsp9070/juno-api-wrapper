@@ -14,6 +14,7 @@ import {
   Payment,
   NewCharge,
   CardDetails,
+  PaymentBilling,
 } from './@types/juno';
 
 export class Juno {
@@ -90,8 +91,8 @@ export class Juno {
 
   async createPayment(
     chargeId: string,
-    billing: { email: string; address: string },
-    creditCardDetails: CardDetails
+    billing: PaymentBilling,
+    cardDetails: CardDetails
   ): Promise<Payment> {
     const body = {
       chargeId,
@@ -99,7 +100,7 @@ export class Juno {
         ...billing,
       },
       creditCardDetails: {
-        ...creditCardDetails,
+        ...cardDetails,
       },
     };
 

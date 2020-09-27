@@ -1,6 +1,6 @@
 {
   "name": "juno-api-wrapper",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A wrapper for Juno API",
   "main": "./build/src/index.js",
   "typings": "./build/juno.d.ts",
