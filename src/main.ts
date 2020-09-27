@@ -91,13 +91,13 @@ export class Juno {
 
   async createPayment(
     chargeId: string,
-    billing: PaymentBilling,
+    billingDetails: PaymentBilling,
     cardDetails: CardDetails
   ): Promise<Payment> {
     const body = {
       chargeId,
       billing: {
-        ...billing,
+        ...billingDetails,
       },
       creditCardDetails: {
         ...cardDetails,
