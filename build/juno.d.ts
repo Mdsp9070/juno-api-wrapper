@@ -100,7 +100,7 @@ declare class Juno {
   checkChargeStatus(chargeId: string): Promise<ChargeStatus>;
   createPayment(
     chargeId: string,
-    billing: { email: string; address: string },
+    billing: PaymentBilling,
     creditCardDetails: CardDetails
   ): Promise<Payment>;
 }
