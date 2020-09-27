@@ -98,7 +98,9 @@ export class Juno {
       billing: {
         ...billing,
       },
-      ...creditCardDetails,
+      creditCardDetails: {
+        ...creditCardDetails,
+      },
     };
 
     const { data, status } = await this.api.post<Payment>('/payments', body, {
