@@ -99,7 +99,9 @@ export class Juno {
       ...creditCardDetails,
     };
 
-    const { data, status } = await this.api.post<Payment>('/payments', body);
+    const { data, status } = await this.api.post<Payment>('/payments', body, {
+      headers: this.headers,
+    });
 
     if (status !== 200 || !data.transactionId)
       throw new AppError('Error on processing payment!', status);
