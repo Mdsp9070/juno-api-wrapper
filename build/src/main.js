@@ -147,7 +147,9 @@ var Juno = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         body = __assign(__assign({ chargeId: chargeId }, billing), creditCardDetails);
-                        return [4 /*yield*/, this.api.post('/payments', body)];
+                        return [4 /*yield*/, this.api.post('/payments', body, {
+                                headers: this.headers,
+                            })];
                     case 1:
                         _a = _b.sent(), data = _a.data, status = _a.status;
                         if (status !== 200 || !data.transactionId)
