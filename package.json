@@ -6,7 +6,7 @@
   "typings": "./build/juno.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepublish": "yarn build"
+    "prepare": "yarn build"
   },
   "keywords": [
     "API",

@@ -75,8 +75,8 @@ export interface ChargeStatus {
 }
 
 export interface CardDetails {
-  creaditCardHash: string;
-  creaditCardId?: string;
+  creditCardHash: string;
+  creditCardId?: string;
 }
 
 export type BanksResponse = { name: string; number: string }[];

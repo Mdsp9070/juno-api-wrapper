@@ -1,12 +1,12 @@
 {
     "name": "juno-api-wrapper",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "description": "A wrapper for Juno API",
     "main": "./build/src/index.js",
     "typings": "./build/juno.d.ts",
     "scripts": {
         "build": "tsc",
-        "prepublish": "yarn build"
+        "prepare": "yarn build"
     },
     "keywords": [
         "API",

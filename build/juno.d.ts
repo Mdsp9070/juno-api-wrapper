@@ -40,8 +40,8 @@ interface ChargeStatus {
 }
 
 interface CardDetails {
-  creaditCardHash: string;
-  creaditCardId?: string;
+  creditCardHash: string;
+  creditCardId?: string;
 }
 
 type BanksResponse = { name: string; number: string }[];
