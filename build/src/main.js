@@ -146,7 +146,11 @@ var Juno = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        body = __assign({ chargeId: chargeId, billing: __assign({}, billing) }, creditCardDetails);
+                        body = {
+                            chargeId: chargeId,
+                            billing: __assign({}, billing),
+                            creditCardDetails: __assign({}, creditCardDetails),
+                        };
                         return [4 /*yield*/, this.api.post('/payments', body, {
                                 headers: this.headers,
                             })];
