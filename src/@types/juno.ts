@@ -28,6 +28,12 @@ export interface Charges {
       id: string;
       code: number;
       dueDate: string;
+      billetDetails: {
+        bankAccount: string;
+        ourNumber: string;
+        barcodeNumber: string;
+        portfolio: string;
+      };
       payments: {
         id: string;
         code: number;
