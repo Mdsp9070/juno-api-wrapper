@@ -98,6 +98,12 @@ export type ChargesResponse = {
   id: string;
   code: number;
   dueDate: string;
+  billetDetails: {
+    bankAccount: string;
+    ourNumber: string;
+    barcodeNumber: string;
+    portfolio: string;
+  };
 }[];
 
 export interface Payment {
